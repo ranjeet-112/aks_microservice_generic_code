@@ -53,28 +53,28 @@ terraform-apply:
   if: github.ref == 'refs/heads/main'
   needs: terraform-init-plan
   environment: dev
-    steps:
-     - name: checkout
-       uses: ranjeet-112/my-action@v1
+  steps:
+   - name: checkout
+     uses: ranjeet-112/my-action@v1
     
-     - name: Azure Login
-       uses: Azure/login@v2.3.0
-       with:
-          client-id: e0a7672f-5903-4d93-9d70-5dadafa94bc6
-          tenant-id: 963eb818-eef0-442e-a584-03a5e8fbb97f
-          subscription-id: dc1b0d18-b7a7-4981-90c1-5f01ea6fc258
-   
+   - name: Azure Login
+     uses: Azure/login@v2.3.0
+     with:
+        client-id: e0a7672f-5903-4d93-9d70-5dadafa94bc6
+        tenant-id: 963eb818-eef0-442e-a584-03a5e8fbb97f
+        subscription-id: dc1b0d18-b7a7-4981-90c1-5f01ea6fc258
+ 
           
-     - name: Terraform Init
-       id: init
-       run: terraform init -input=false  
-       working-directory: Environment/dev
+   - name: Terraform Init
+     id: init
+     run: terraform init -input=false  
+     working-directory: Environment/dev
 
-     - name: Terraform Apply
-       id: apply
-       run: terraform apply --auto-approve
-       continue-on-error: true
-       working-directory: Environment/dev  
+   - name: Terraform Apply
+     id: apply
+     run: terraform apply --auto-approve
+     continue-on-error: true
+     working-directory: Environment/dev  
     
 
       
