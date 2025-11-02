@@ -18,10 +18,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        # agar tu apna custom action use karna chahta hai (my-action@v1)
-        # to niche line uncomment kar:
-        # uses: ranjeet-112/my-action@v1
-
+       
       - name: Azure Login
         uses: Azure/login@v2.3.0
         with:
