@@ -1,4 +1,4 @@
-name: "Dev Terraform Workflow"
+name: "Prod Terraform Workflow"
 
 on:
   pull_request:
@@ -15,6 +15,7 @@ permissions:
 jobs: 
   terraform-init-plan:
     runs-on: self-hosted
+    environment: dev   
     steps: 
       - name: Checkout
         uses: actions/checkout@v5.0.0
@@ -30,29 +31,29 @@ jobs:
         id: fmt
         run: terraform fmt -check
         continue-on-error: true
-        working-directory: environments/dev
+        working-directory: environments/prod
         
       - name: Terraform Init
         id: init
         run: terraform init -input=false  
-        working-directory: environments/dev
+        working-directory: environments/prod
 
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
-        working-directory: environments/dev        
+        working-directory: environments/prod        
       
       - name: Terraform Plan
         id: plan
         run: terraform plan -no-color -input=false
         continue-on-error: true
-        working-directory: environments/dev    
+        working-directory: environments/prod    
         
   terraform-apply:    
     runs-on: self-hosted
     if: github.ref == 'refs/heads/main'
     needs: terraform-init-plan
-    environment: dev
+    environment: dev   
     steps:
       - name: Checkout
         uses: actions/checkout@v5.0.0
@@ -67,11 +68,10 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init -input=false  
-        working-directory: environments/dev
+        working-directory: environments/prod
 
       - name: Terraform Apply
         id: apply
         run: terraform apply --auto-approve
         continue-on-error: true
-        working-directory: environments/dev              
-          
+        working-directory: environments/prod
