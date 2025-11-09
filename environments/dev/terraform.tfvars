@@ -1,6 +1,6 @@
 rgs = {
   dev_rg1 = {
-    name     = "dev-rg1"
+    name     = "dev-rg"
     location = "centralus"
     tags = {
       ManagedBy   = "Terraform"
@@ -12,9 +12,9 @@ rgs = {
 
 aks_clusters = {
   dev_aks1 = {
-    name                = "dev-aks-cluster"
+    name                = "devakscluster"
     location            = "centralus"
-    resource_group_name = "dev-rg1"
+    resource_group_name = "dev-rg"
     dns_prefix          = "devaks"
 
     default_node_pool = {
@@ -42,8 +42,8 @@ aks_clusters = {
 
 acrs = {
   dev_acr1 = {
-    name                = "devacr"
-    resource_group_name = "dev-rg1"
+    name                = "devcontainer"
+    resource_group_name = "dev-rg"
     location            = "centralus"
     sku                 = "Premium"
     admin_enabled       = false
@@ -57,8 +57,8 @@ acrs = {
 
 public_ips = {
   dev_pip1 = {
-    name                = "dev-public-ip"
-    resource_group_name = "dev-rg1"
+    name                = "devPIP"
+    resource_group_name = "dev-rg"
     location            = "centralus"
     allocation_method   = "Static"
     sku                 = "Standard"
@@ -72,9 +72,9 @@ public_ips = {
 
 key_vaults = {
   kv1 = {
-    name                        = "dev-key-vault"
+    name                        = "devKV"
     location                    = "centralus"
-    resource_group_name         = "dev-rg1"
+    resource_group_name         = "dev-rg"
     enabled_for_disk_encryption = true
     soft_delete_retention_days  = 7
     purge_protection_enabled    = true
@@ -100,8 +100,8 @@ key_vaults = {
 
 sql_servers = {
   dev_sql1 = {
-    name                         = "dev-sql-server"
-    resource_group_name          = "dev-rg1"
+    name                         = "devsqlserver"
+    resource_group_name          = "dev-rg"
     location                     = "centralus"
     version                      = "12.0"
     admin_login                  = "sqladminuser"
@@ -117,7 +117,7 @@ sql_servers = {
 
 sql_dbs = {
   dev_sqldb1 = {
-    name         = "dev-sql-database"
+    name         = "devsqldatabase"
     server_id    = "/subscriptions/dc1b0d18-b7a7-4981-90c1-5f01ea6fc258/resourceGroups/dev-resource-group-1/providers/Microsoft.Sql/servers/dev-sql-server-1"
     sku_name     = "S0"
     max_size_gb  = 10
